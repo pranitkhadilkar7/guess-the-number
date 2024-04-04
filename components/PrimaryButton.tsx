@@ -1,15 +1,15 @@
-import { Children, ReactNode, useCallback } from 'react'
+import { Children, ReactNode, memo, useCallback } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 
 type Props = {
   children: ReactNode
+  onPress: () => void
 }
 
-export function PrimaryButton({ children }: Props) {
-  const pressHandler = useCallback(() => {
-    console.log('button pressed')
-  }, [])
-
+export const PrimaryButton = memo(function PrimaryButton({
+  children,
+  onPress,
+}: Props) {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -18,14 +18,14 @@ export function PrimaryButton({ children }: Props) {
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
         }
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: '#640233' }}
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {
