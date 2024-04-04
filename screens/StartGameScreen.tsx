@@ -13,7 +13,7 @@ export function StartGameScreen() {
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton>Resetttt</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
           <PrimaryButton>Confirm</PrimaryButton>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: '#4e0329',
+    backgroundColor: '#38021d',
     borderRadius: 8,
     elevation: 4,
     shadowColor: 'black',
