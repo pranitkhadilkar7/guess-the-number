@@ -1,10 +1,17 @@
 import { memo } from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 export const GameScreen = memo(function GameScreen() {
   return (
-    <View>
+    <View style={styles.screen}>
       <Text>Welcome to GameScreen</Text>
     </View>
   )
+})
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    padding: 30,
+  },
 })
