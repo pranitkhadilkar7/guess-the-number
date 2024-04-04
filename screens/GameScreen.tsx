@@ -1,10 +1,11 @@
 import { memo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { Title } from '../components/Title'
 
 export const GameScreen = memo(function GameScreen() {
   return (
     <View style={styles.screen}>
-      <Text>Welcome to GameScreen</Text>
+      <Title>Oponent's Guess</Title>
     </View>
   )
 })
