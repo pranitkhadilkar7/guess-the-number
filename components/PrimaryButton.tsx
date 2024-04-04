@@ -1,14 +1,42 @@
-import { Children, ReactNode } from 'react'
-import { Text, View } from 'react-native'
+import { Children, ReactNode, useCallback } from 'react'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 
 type Props = {
   children: ReactNode
 }
 
 export function PrimaryButton({ children }: Props) {
+  const pressHandler = useCallback(() => {
+    console.log('button pressed')
+  }, [])
+
   return (
-    <View>
-      <Text>{children}</Text>
+    <View style={styles.buttonOuterContainer}>
+      <Pressable
+        style={styles.buttonInnerContainer}
+        onPress={pressHandler}
+        android_ripple={{ color: '#640233' }}
+      >
+        <Text style={styles.buttonText}>{children}</Text>
+      </Pressable>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  buttonOuterContainer: {
+    borderRadius: 28,
+    margin: 4,
+    overflow: 'hidden',
+  },
+  buttonInnerContainer: {
+    backgroundColor: '#72063c',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    elevation: 4,
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+  },
+})
