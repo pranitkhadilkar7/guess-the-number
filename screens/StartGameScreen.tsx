@@ -1,8 +1,14 @@
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import { PrimaryButton } from '../components/PrimaryButton'
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
-export function StartGameScreen() {
+type Props = {
+  onPickNumber: (enteredNumber: number) => void
+}
+
+export const StartGameScreen = memo(function StartGameScreen({
+  onPickNumber,
+}: Props) {
   const [enteredNumber, setEnteredNumber] = useState<string>()
 
   function numberInputHandler(enteredText: string) {
@@ -20,8 +26,10 @@ export function StartGameScreen() {
           onPress: resetInputHandler,
         },
       ])
+      return
     }
-  }, [enteredNumber])
+    onPickNumber(choosenNumber)
+  }, [enteredNumber, onPickNumber])
 
   const resetInputHandler = useCallback(() => {
     setEnteredNumber('')
@@ -48,7 +56,7 @@ export function StartGameScreen() {
       </View>
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   inputContainer: {
