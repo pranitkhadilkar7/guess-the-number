@@ -3,6 +3,8 @@ import { Alert, StyleSheet, Text, View } from 'react-native'
 import { Title } from '../components/ui/Title'
 import { NumberContainer } from '../components/game/NumberContainer'
 import { PrimaryButton } from '../components/ui/PrimaryButton'
+import { Card } from '../components/ui/Card'
+import { InstructionText } from '../components/ui/InstructionText'
 
 type Props = {
   userNumber: number
@@ -70,8 +72,8 @@ export const GameScreen = memo(function GameScreen({
     <View style={styles.screen}>
       <Title>Oponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or Lower?</Text>
+      <Card>
+        <InstructionText>Higher or Lower?</InstructionText>
         <View>
           <PrimaryButton onPress={nextGuessHandler.bind({}, 'higher')}>
             +
@@ -80,7 +82,7 @@ export const GameScreen = memo(function GameScreen({
             -
           </PrimaryButton>
         </View>
-      </View>
+      </Card>
     </View>
   )
 })
