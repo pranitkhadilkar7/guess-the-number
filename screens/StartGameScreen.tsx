@@ -1,6 +1,7 @@
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import { PrimaryButton } from '../components/PrimaryButton'
 import { memo, useCallback, useState } from 'react'
+import { COLORS } from '../constants/colors'
 
 type Props = {
   onPickNumber: (enteredNumber: number) => void
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: '#38021d',
+    backgroundColor: COLORS.primary800,
     borderRadius: 8,
     elevation: 4,
     shadowColor: 'black',
@@ -76,8 +77,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     fontSize: 32,
-    color: '#ddb52f',
-    borderBottomColor: '#ddb52f',
+    color: COLORS.accent500,
+    borderBottomColor: COLORS.accent500,
     borderBottomWidth: 2,
     marginVertical: 8,
     textAlign: 'center',

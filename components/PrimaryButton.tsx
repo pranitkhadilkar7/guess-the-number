@@ -1,5 +1,6 @@
 import { Children, ReactNode, memo, useCallback } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { COLORS } from '../constants/colors'
 
 type Props = {
   children: ReactNode
@@ -19,7 +20,7 @@ export const PrimaryButton = memo(function PrimaryButton({
             : styles.buttonInnerContainer
         }
         onPress={onPress}
-        android_ripple={{ color: '#640233' }}
+        android_ripple={{ color: COLORS.primary600 }}
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   buttonInnerContainer: {
-    backgroundColor: '#72063c',
+    backgroundColor: COLORS.primary500,
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 4,
