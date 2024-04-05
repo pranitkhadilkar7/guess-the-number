@@ -5,6 +5,7 @@ import { NumberContainer } from '../components/game/NumberContainer'
 import { PrimaryButton } from '../components/ui/PrimaryButton'
 import { Card } from '../components/ui/Card'
 import { InstructionText } from '../components/ui/InstructionText'
+import { FontAwesome } from '@expo/vector-icons'
 
 type Props = {
   userNumber: number
@@ -79,12 +80,12 @@ export const GameScreen = memo(function GameScreen({
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind({}, 'lower')}>
-              -
+              <FontAwesome name="minus" size={24} color="white" />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind({}, 'higher')}>
-              +
+              <FontAwesome name="plus" size={24} color="white" />
             </PrimaryButton>
           </View>
         </View>
