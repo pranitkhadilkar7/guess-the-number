@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { Alert, StyleSheet, Text, View } from 'react-native'
 import { Title } from '../components/ui/Title'
 import { NumberContainer } from '../components/game/NumberContainer'
@@ -6,6 +6,7 @@ import { PrimaryButton } from '../components/ui/PrimaryButton'
 
 type Props = {
   userNumber: number
+  gameOver: () => void
 }
 
 let minBoundary = 1
@@ -25,12 +26,11 @@ function generateRandomNumberBetween(
   }
 }
 
-export const GameScreen = memo(function GameScreen({ userNumber }: Props) {
-  const initialGuess = generateRandomNumberBetween(
-    minBoundary,
-    maxBoundry,
-    userNumber
-  )
+export const GameScreen = memo(function GameScreen({
+  userNumber,
+  gameOver,
+}: Props) {
+  const initialGuess = generateRandomNumberBetween(1, 100, userNumber)
   const [currentGuess, setCurrentGuess] = useState(initialGuess)
 
   const nextGuessHandler = useCallback(
@@ -59,6 +59,12 @@ export const GameScreen = memo(function GameScreen({ userNumber }: Props) {
     },
     [currentGuess, userNumber]
   )
+
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      gameOver()
+    }
+  }, [currentGuess, userNumber, gameOver])
 
   return (
     <View style={styles.screen}>
