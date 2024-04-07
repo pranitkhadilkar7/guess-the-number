@@ -6,9 +6,9 @@ import { GameScreen } from './screens/GameScreen'
 import { COLORS } from './constants/colors'
 import { GameOverScreen } from './screens/GameOverScreen'
 import { useFonts } from 'expo-font'
-// import * as SplashScreen from 'expo-splash-screen'
+import * as SplashScreen from 'expo-splash-screen'
 
-// SplashScreen.preventAutoHideAsync()
+SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [pickedNumber, setPickedNumber] = useState<number>()
@@ -26,12 +26,11 @@ export default function App() {
     setGameIsOver(true)
   }, [])
 
-  // const onLayoutRootView = useCallback(async () => {
-  //   console.log('onLayoutRootView')
-  //   if (fontsLoaded || fontsError) {
-  //     await SplashScreen.hideAsync()
-  //   }
-  // }, [fontsLoaded, fontsError])
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontsError) {
+      await SplashScreen.hideAsync()
+    }
+  }, [fontsLoaded, fontsError])
 
   if (!fontsLoaded && !fontsError) {
     return null
@@ -51,6 +50,7 @@ export default function App() {
     <LinearGradient
       colors={[COLORS.primary700, COLORS.accent500]}
       style={styles.rootScreen}
+      onLayout={onLayoutRootView}
     >
       <ImageBackground
         source={require('./assets/images/background.jpg')}
