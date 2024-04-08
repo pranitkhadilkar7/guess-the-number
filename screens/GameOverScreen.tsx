@@ -2,6 +2,7 @@ import { memo } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { Title } from '../components/ui/Title'
 import { COLORS } from '../constants/colors'
+import { PrimaryButton } from '../components/ui/PrimaryButton'
 
 export const GameOverScreen = memo(function GameOverScreen() {
   return (
@@ -13,7 +14,11 @@ export const GameOverScreen = memo(function GameOverScreen() {
           source={require('../assets/images/success.png')}
         />
       </View>
-      <Text>Your phone needed X rounds to guess Y number</Text>
+      <Text style={styles.summaryText}>
+        Your phone needed <Text style={styles.highlightText}>X</Text> rounds to
+        guess the number <Text style={styles.highlightText}>Y</Text>
+      </Text>
+      <PrimaryButton onPress={() => {}}>Start the Game</PrimaryButton>
     </View>
   )
 })
@@ -37,5 +42,15 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+  summaryText: {
+    fontFamily: 'open-sans',
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+  highlightText: {
+    fontFamily: 'open-sans-bold',
+    color: COLORS.primary500,
   },
 })
