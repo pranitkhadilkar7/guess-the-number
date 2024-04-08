@@ -10,7 +10,7 @@ import { GuessLogItem } from '../components/game/GuessLogItem'
 
 type Props = {
   userNumber: number
-  gameOver: () => void
+  gameOver: (guessNumber: number) => void
 }
 
 let minBoundary = 1
@@ -70,7 +70,7 @@ export const GameScreen = memo(function GameScreen({
     if (currentGuess === userNumber) {
       minBoundary = 1
       maxBoundry = 100
-      gameOver()
+      gameOver(guessRounds.length)
     }
   }, [currentGuess, userNumber, gameOver])
 
