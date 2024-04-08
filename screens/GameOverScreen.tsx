@@ -1,5 +1,12 @@
 import { memo } from 'react'
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from 'react-native'
 import { Title } from '../components/ui/Title'
 import { COLORS } from '../constants/colors'
 import { PrimaryButton } from '../components/ui/PrimaryButton'
@@ -15,10 +22,23 @@ export const GameOverScreen = memo(function GameOverScreen({
   roundsNumber,
   onStartGame,
 }: Props) {
+  const { width, height } = useWindowDimensions()
+
+  let imageSize = 100
+
+  if (width < 380) imageSize = 150
+
+  if (height < 400) imageSize = 80
+
   return (
     <View style={styles.rootContainer}>
       <Title>Game Over</Title>
-      <View style={styles.imageContainer}>
+      <View
+        style={[
+          styles.imageContainer,
+          { width: imageSize, height: imageSize, borderRadius: imageSize / 2 },
+        ]}
+      >
         <Image
           style={styles.image}
           source={require('../assets/images/success.png')}
@@ -34,7 +54,7 @@ export const GameOverScreen = memo(function GameOverScreen({
   )
 })
 
-const deviceWidth = Dimensions.get('window').width
+// const deviceWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -44,9 +64,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imageContainer: {
-    width: deviceWidth < 380 ? 150 : 300,
-    height: deviceWidth < 380 ? 150 : 300,
-    borderRadius: deviceWidth < 300 ? 75 : 150,
+    // width: deviceWidth < 380 ? 150 : 300,
+    // height: deviceWidth < 380 ? 150 : 300,
+    // borderRadius: deviceWidth < 300 ? 75 : 150,
     overflow: 'hidden',
     borderWidth: 4,
     borderColor: COLORS.primary800,
