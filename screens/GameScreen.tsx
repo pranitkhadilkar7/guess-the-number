@@ -6,6 +6,7 @@ import { PrimaryButton } from '../components/ui/PrimaryButton'
 import { Card } from '../components/ui/Card'
 import { InstructionText } from '../components/ui/InstructionText'
 import { FontAwesome } from '@expo/vector-icons'
+import { GuessLogItem } from '../components/game/GuessLogItem'
 
 type Props = {
   userNumber: number
@@ -96,8 +97,14 @@ export const GameScreen = memo(function GameScreen({
       </Card>
       <FlatList
         data={guessRounds}
-        renderItem={(itemData) => <Text>{itemData.item}</Text>}
+        renderItem={(itemData) => (
+          <GuessLogItem
+            guessNumber={itemData.item}
+            guessAttempt={guessRounds.length - itemData.index}
+          />
+        )}
         keyExtractor={(item) => `${item}`}
+        style={{ marginTop: 16 }}
       />
     </View>
   )
