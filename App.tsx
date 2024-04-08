@@ -26,6 +26,10 @@ export default function App() {
     setGameIsOver(true)
   }, [])
 
+  const startGameHandler = useCallback(() => {
+    setPickedNumber(undefined)
+  }, [])
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontsError) {
       await SplashScreen.hideAsync()
@@ -43,7 +47,13 @@ export default function App() {
   }
 
   if (gameIsOver && pickedNumber) {
-    screen = <GameOverScreen />
+    screen = (
+      <GameOverScreen
+        userNumber={pickedNumber}
+        roundsNumber={0}
+        onStartGame={startGameHandler}
+      />
+    )
   }
 
   return (

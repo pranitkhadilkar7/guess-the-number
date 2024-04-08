@@ -65,6 +65,8 @@ export const GameScreen = memo(function GameScreen({
 
   useEffect(() => {
     if (currentGuess === userNumber) {
+      minBoundary = 1
+      maxBoundry = 100
       gameOver()
     }
   }, [currentGuess, userNumber, gameOver])

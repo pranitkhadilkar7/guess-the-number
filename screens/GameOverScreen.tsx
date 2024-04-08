@@ -4,7 +4,17 @@ import { Title } from '../components/ui/Title'
 import { COLORS } from '../constants/colors'
 import { PrimaryButton } from '../components/ui/PrimaryButton'
 
-export const GameOverScreen = memo(function GameOverScreen() {
+type Props = {
+  userNumber: number
+  roundsNumber: number
+  onStartGame: () => void
+}
+
+export const GameOverScreen = memo(function GameOverScreen({
+  userNumber,
+  roundsNumber,
+  onStartGame,
+}: Props) {
   return (
     <View style={styles.rootContainer}>
       <Title>Game Over</Title>
@@ -15,10 +25,11 @@ export const GameOverScreen = memo(function GameOverScreen() {
         />
       </View>
       <Text style={styles.summaryText}>
-        Your phone needed <Text style={styles.highlightText}>X</Text> rounds to
-        guess the number <Text style={styles.highlightText}>Y</Text>
+        Your phone needed{' '}
+        <Text style={styles.highlightText}>{roundsNumber}</Text> rounds to guess
+        the number <Text style={styles.highlightText}>{userNumber}</Text>
       </Text>
-      <PrimaryButton onPress={() => {}}>Start the Game</PrimaryButton>
+      <PrimaryButton onPress={onStartGame}>Start the Game</PrimaryButton>
     </View>
   )
 })
