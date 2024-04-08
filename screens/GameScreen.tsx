@@ -35,6 +35,7 @@ export const GameScreen = memo(function GameScreen({
 }: Props) {
   const initialGuess = generateRandomNumberBetween(1, 100, userNumber)
   const [currentGuess, setCurrentGuess] = useState(initialGuess)
+  const [guessRounds, setGuessRounds] = useState<number[]>([initialGuess])
 
   const nextGuessHandler = useCallback(
     (direction: string) => {
@@ -59,6 +60,7 @@ export const GameScreen = memo(function GameScreen({
         currentGuess
       )
       setCurrentGuess(rndNumber)
+      setGuessRounds((prev) => [rndNumber, ...prev])
     },
     [currentGuess, userNumber]
   )
@@ -92,6 +94,9 @@ export const GameScreen = memo(function GameScreen({
           </View>
         </View>
       </Card>
+      {guessRounds.map((round) => (
+        <Text key={round}>{round}</Text>
+      ))}
     </View>
   )
 })

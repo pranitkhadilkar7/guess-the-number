@@ -28,6 +28,7 @@ export default function App() {
 
   const startGameHandler = useCallback(() => {
     setPickedNumber(undefined)
+    setGameIsOver(false)
   }, [])
 
   const onLayoutRootView = useCallback(async () => {
