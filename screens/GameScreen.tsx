@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useState } from 'react'
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import { Alert, FlatList, StyleSheet, Text, View } from 'react-native'
 import { Title } from '../components/ui/Title'
 import { NumberContainer } from '../components/game/NumberContainer'
 import { PrimaryButton } from '../components/ui/PrimaryButton'
@@ -94,9 +94,11 @@ export const GameScreen = memo(function GameScreen({
           </View>
         </View>
       </Card>
-      {guessRounds.map((round) => (
-        <Text key={round}>{round}</Text>
-      ))}
+      <FlatList
+        data={guessRounds}
+        renderItem={(itemData) => <Text>{itemData.item}</Text>}
+        keyExtractor={(item) => `${item}`}
+      />
     </View>
   )
 })
