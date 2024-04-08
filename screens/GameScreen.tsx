@@ -1,5 +1,12 @@
 import { memo, useCallback, useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native'
+import {
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from 'react-native'
 import { Title } from '../components/ui/Title'
 import { NumberContainer } from '../components/game/NumberContainer'
 import { PrimaryButton } from '../components/ui/PrimaryButton'
@@ -38,6 +45,8 @@ export const GameScreen = memo(function GameScreen({
   const [currentGuess, setCurrentGuess] = useState(initialGuess)
   const [guessRounds, setGuessRounds] = useState<number[]>([initialGuess])
 
+  const { width } = useWindowDimensions()
+
   const nextGuessHandler = useCallback(
     (direction: string) => {
       if (
@@ -74,9 +83,10 @@ export const GameScreen = memo(function GameScreen({
     }
   }, [currentGuess, userNumber, gameOver])
 
-  return (
-    <View style={styles.screen}>
-      <Title>Oponent's Guess</Title>
+  const marginTopDistance = width < 380 ? 100 : 30
+
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
@@ -95,6 +105,31 @@ export const GameScreen = memo(function GameScreen({
           </View>
         </View>
       </Card>
+    </>
+  )
+
+  if (width > 500) {
+    content = (
+      <View style={styles.buttonsContainerWide}>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton onPress={nextGuessHandler.bind({}, 'lower')}>
+            <FontAwesome name="minus" size={24} color="white" />
+          </PrimaryButton>
+        </View>
+        <NumberContainer>{currentGuess}</NumberContainer>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton onPress={nextGuessHandler.bind({}, 'higher')}>
+            <FontAwesome name="plus" size={24} color="white" />
+          </PrimaryButton>
+        </View>
+      </View>
+    )
+  }
+
+  return (
+    <View style={[styles.screen, { marginTop: marginTopDistance }]}>
+      <Title>Oponent's Guess</Title>
+      {content}
       <FlatList
         data={guessRounds}
         renderItem={(itemData) => (
@@ -104,7 +139,7 @@ export const GameScreen = memo(function GameScreen({
           />
         )}
         keyExtractor={(item) => `${item}`}
-        style={{ marginTop: 16 }}
+        style={{ marginTop: 16, width: '100%' }}
       />
     </View>
   )
@@ -114,6 +149,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 30,
+    alignItems: 'center',
   },
   instructionText: {
     marginBottom: 12,
@@ -123,5 +159,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  buttonsContainerWide: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })

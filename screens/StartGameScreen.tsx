@@ -50,7 +50,7 @@ export const StartGameScreen = memo(function StartGameScreen({
     setEnteredNumber('')
   }, [])
 
-  const marginTopDistance = width < 300 ? 30 : 100
+  const marginTopDistance = width < 380 ? 30 : 100
 
   return (
     <ScrollView style={styles.screen}>
