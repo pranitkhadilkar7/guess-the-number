@@ -1,5 +1,5 @@
 import { ReactNode, memo } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Dimensions, StyleSheet, View } from 'react-native'
 import { COLORS } from '../../constants/colors'
 
 type Props = {
@@ -10,10 +10,12 @@ export const Card = memo(function Card({ children }: Props) {
   return <View style={styles.card}>{children}</View>
 })
 
+const deviceWidth = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: deviceWidth < 380 ? 36 : 50,
     marginHorizontal: 24,
     padding: 16,
     backgroundColor: COLORS.primary800,
