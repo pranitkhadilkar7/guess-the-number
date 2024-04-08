@@ -1,4 +1,12 @@
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import {
+  Alert,
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  useWindowDimensions,
+} from 'react-native'
 import { PrimaryButton } from '../components/ui/PrimaryButton'
 import { memo, useCallback, useState } from 'react'
 import { COLORS } from '../constants/colors'
@@ -14,6 +22,7 @@ export const StartGameScreen = memo(function StartGameScreen({
   onPickNumber,
 }: Props) {
   const [enteredNumber, setEnteredNumber] = useState<string>()
+  const { width, height } = useWindowDimensions()
 
   function numberInputHandler(enteredText: string) {
     setEnteredNumber(enteredText)
@@ -39,8 +48,10 @@ export const StartGameScreen = memo(function StartGameScreen({
     setEnteredNumber('')
   }, [])
 
+  const marginTopDistance = width < 300 ? 30 : 100
+
   return (
-    <View style={styles.rootContainer}>
+    <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
       <Title>Guess The Number</Title>
       <Card>
         <InstructionText>Enter a Number</InstructionText>
@@ -69,7 +80,6 @@ export const StartGameScreen = memo(function StartGameScreen({
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    marginTop: 100,
     alignItems: 'center',
   },
   inputContainer: {
